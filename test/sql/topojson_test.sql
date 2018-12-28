@@ -16,11 +16,13 @@ WITH entities AS (
 	FROM geometry g 
 )
 SELECT 
+jsonb_pretty(
 plv8.d3_topologytofeatures(
 plv8.d3_totopojson(
 	'{"type": "FeatureCollection"}'::JSONB ||
 	 jsonb_set('{}'::JSONB, '{features}',jsonb_agg(feat))
 	 ,1e8
+)
 )
 )
 FROM features;
